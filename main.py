@@ -13,6 +13,13 @@ JOKE = "My phone heats up the second I open the camera, like it's blushing at th
 
 
 def main() -> None:
+    # Gate: the competition requires exactly one line, 1-200 UTF-8 chars.
+    # Fail loudly instead of writing an out-of-spec entry.
+    if not 1 <= len(JOKE) <= 200:
+        raise ValueError(f"JOKE must be 1-200 characters, got {len(JOKE)}")
+    if "\n" in JOKE or "\r" in JOKE:
+        raise ValueError("JOKE must be a single line")
+
     for path in ("/output/entry.txt", "entry.txt"):
         directory = os.path.dirname(path)
         if directory:
